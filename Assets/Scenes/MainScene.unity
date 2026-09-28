@@ -443,8 +443,8 @@ GameObject:
   m_Component:
   - component: {fileID: 328862867}
   - component: {fileID: 328862866}
-  - component: {fileID: 328862865}
   - component: {fileID: 328862864}
+  - component: {fileID: 328862868}
   m_Layer: 0
   m_Name: BossZombie
   m_TagString: Enemy
@@ -479,44 +479,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &328862865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328862863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08ad96fc99abe3d4aa5285891e3cc372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  config: {fileID: 11400000, guid: 1c55d7307bc739c42a5d2abaa4872178, type: 2}
-  hp: 100
-  damage: 10
-  jarakDeteksi: 6
-  jarakSerang: 1.2
-  jedaSerang: 1
-  moveSpeed: 2
-  waktuTungguIdle: 3
-  batasPatrolMin: {x: -4, y: -2}
-  batasPatrolMax: {x: 4, y: 2}
-  jarakSampaiTitik: 0.2
-  onZombieMatiVisual:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 328862866}
-        m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!212 &328862866
 SpriteRenderer:
   serializedVersion: 2
@@ -591,6 +553,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &328862868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328862863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9955be2a9e3f5414f9ccbe4f5d3ceaff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossZombie
+  config: {fileID: 11400000, guid: 1c55d7307bc739c42a5d2abaa4872178, type: 2}
+  hp: 200
+  damage: 20
+  jarakDeteksi: 6
+  jarakSerang: 1.2
+  jedaSerang: 1
+  moveSpeed: 2
+  waktuTungguIdle: 3
+  batasPatrolMin: {x: -4, y: -2}
+  batasPatrolMax: {x: 4, y: 2}
+  jarakSampaiTitik: 0.2
+  onZombieMatiVisual:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1c55d7307bc739c42a5d2abaa4872178, type: 2}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  damageTambahan: 20
 --- !u!1 &394578071
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +637,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e1fd8df93874ebd4fbd28c0bb08d13d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1557,7 +1558,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e1fd8df93874ebd4fbd28c0bb08d13d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1709,7 +1710,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e1fd8df93874ebd4fbd28c0bb08d13d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1860,7 +1861,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e1fd8df93874ebd4fbd28c0bb08d13d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2734,7 +2735,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: e1fd8df93874ebd4fbd28c0bb08d13d9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
