@@ -16,10 +16,16 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
     public GameManager gameManager;
     private Vector2 arahGerak;
 
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
         hpMaks = hp; 
         UpdateBarDarah();
+
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void OnMove(InputValue value)
@@ -32,6 +38,24 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
     {
         Vector3 gerak = new Vector3(arahGerak.x, arahGerak.y, 0f);
         transform.position += gerak * kecepatan * Time.deltaTime;
+
+        if (arahGerak.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (arahGerak.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+
+        bool isMoving = arahGerak.sqrMagnitude > 0.01f;
+        anim.SetBool("IsMoving", isMoving);
+
+        if (isMoving)
+        {
+            anim.SetFloat("MoveX", arahGerak.x);
+            anim.SetFloat("MoveY", arahGerak.y);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
