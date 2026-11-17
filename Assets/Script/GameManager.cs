@@ -34,11 +34,19 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("WOI! Kamu Menang");
 
+        // Matikan spawner supaya tidak muncul musuh baru setelah menang
+        EnemySpawner spawner = FindFirstObjectByType<EnemySpawner>();
+        if (spawner != null)
+        {
+            spawner.StopSpawning();
+        }
+
         GameObject[] musuh = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (GameObject enemy in musuh)
         {
             Destroy(enemy);
+            
         }
     }
 }

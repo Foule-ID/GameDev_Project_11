@@ -14,9 +14,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Vector2 batasSpawnMax = new Vector2(7f, 4f);
 
     private float timer = 0f;
+    private bool isSpawning = true;
 
     void Update()
     {
+        if (!isSpawning) return;
         timer += Time.deltaTime;
 
         if (timer >= intervalSpawn)
@@ -24,6 +26,11 @@ public class EnemySpawner : MonoBehaviour
             timer = 0f;
             SpawnEnemy();
         }
+    }
+
+    public void StopSpawning()
+    {
+        isSpawning = false;
     }
 
     void SpawnEnemy()
