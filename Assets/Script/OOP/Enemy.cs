@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IDdamageable
     [Header("Pengaturan Enemy")]
     [SerializeField] private int hp = 100;
     [SerializeField] private int damage = 10;
+    [SerializeField] private bool hancurSetelahMenyerang = true;
 
     [Header("State Machine")]
     [SerializeField] private float jarakDeteksi = 6f;
@@ -40,7 +41,7 @@ public class Enemy : MonoBehaviour, IDdamageable
 
     protected Transform player;
 
-       public static event Action<Enemy> OnZombieMati;
+    public static event Action<Enemy> OnZombieMati;
 
     protected virtual void Start()
     {
@@ -198,6 +199,20 @@ public class Enemy : MonoBehaviour, IDdamageable
     public virtual void Serang()
     {
         Debug.Log("Monster menyerang");
+
+        if (player != null)
+        {
+            IDdamageable target = player.GetComponent<IDdamageable>();
+            if (target != null)
+            {
+                target.KenaDamage(damage);
+
+                if (hancurSetelahMenyerang)
+                {
+                    Mati(); // Langsung hancur setelah menyerang Player
+                }
+            }
+        }
     }
 
     public void KenaDamage(int jumlah)
@@ -224,11 +239,18 @@ public class Enemy : MonoBehaviour, IDdamageable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        IDdamageable target = other.GetComponent<IDdamageable>();
-
-        if (target != null)
+       if (other.CompareTag("Player"))
         {
-            target.KenaDamage(damage);
+            IDdamageable target = other.GetComponent<IDdamageable>();
+            if (target != null)
+            {
+                target.KenaDamage(damage);
+
+                if (hancurSetelahMenyerang)
+                {
+                    Mati();
+                }
+            }
         }
     }
 }
