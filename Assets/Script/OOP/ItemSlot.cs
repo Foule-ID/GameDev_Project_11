@@ -29,6 +29,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         itemDetailsData = item;
         itemName = item.ItemName;
         itemIcon = item.ItemIcon;
+        maxStackSize = item.maxStack;
         AddQuantity(item.Quantity);
     }
 
@@ -81,8 +82,65 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void RightClick()
+   private void RightClick()
     {
-        Debug.Log("Right Clicked on ");
+        if (itemQuantity > 0 && itemDetailsData != null)
+        {
+            UseItem();
+        }
+    }
+
+    private void UseItem()
+    {
+        if (itemDetailsData.healAmount > 0)
+        {
+            PlayerMovement player = FindAnyObjectByType<PlayerMovement>();
+            if (player != null)
+            {
+                player.Heal(itemDetailsData.healAmount);
+                KurangiJumlah(1);
+            }
+        }
+    }
+
+    private void KurangiJumlah(int amount)
+    {
+        itemQuantity -= amount;
+        isFull = itemQuantity >= maxStackSize;
+
+        if (itemQuantity <= 0)
+        {
+            ClearSlot();
+        }
+        else
+        {
+            quantityText.text = itemQuantity.ToString();
+
+            ItemDetailPanel panelKanan = FindAnyObjectByType<ItemDetailPanel>();
+            if (panelKanan != null && isItemSelected)
+            {
+                panelKanan.Show(itemDetailsData, itemQuantity);
+            }
+        }
+    }
+
+    private void ClearSlot()
+    {
+        itemDetailsData = null;
+        itemName = "";
+        itemQuantity = 0;
+        itemIcon = null;
+        isFull = false;
+
+        quantityText.text = "";
+        quantityText.enabled = false;
+        itemImage.sprite = null;
+        itemImage.enabled = false;
+
+        ItemDetailPanel panelKanan = FindAnyObjectByType<ItemDetailPanel>();
+        if (panelKanan != null && isItemSelected)
+        {
+            panelKanan.clear();
+        }
     }
 }

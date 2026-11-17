@@ -16,7 +16,6 @@ public class InventoryManager : MonoBehaviour, GrabableItem
         InventoryCanvas.SetActive(false);
         inventoryAction = InputSystem.actions.FindAction("Inventory");
         
-        // TAMBAHKAN KODE INI: Menyalakan input action agar tombol bisa dideteksi
         if (inventoryAction != null)
         {
             inventoryAction.Enable();
@@ -77,12 +76,16 @@ public class InventoryManager : MonoBehaviour, GrabableItem
             return;
         }
 
-        for (int i = 0; i < itemSlot.Length; i++)
+        // Cek stack hanya jika maxStack item lebih dari 1
+        if (item.maxStack > 1)
         {
-            if (itemSlot[i].CanStackWith(item.ItemName))
+            for (int i = 0; i < itemSlot.Length; i++)
             {
-                itemSlot[i].AddQuantity(item.Quantity);
-                return;
+                if (itemSlot[i].CanStackWith(item.ItemName))
+                {
+                    itemSlot[i].AddQuantity(item.Quantity);
+                    return;
+                }
             }
         }
 

@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
     private int hpMaks;
 
     [Header("UI")]
-    [SerializeField] private Slider barDarah; 
+    [SerializeField] private Image barDarah;
 
     public float kecepatan = 5f;
     public int skor = 0;
@@ -96,11 +96,18 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
         }
     }
 
+    public void Heal(int jumlah)
+{
+    hp = Mathf.Min(hp + jumlah, hpMaks); // Tambah HP tapi tidak melebihi hpMaks
+    Debug.Log($"Player Heal! HP sekarang: {hp}");
+    UpdateBarDarah();
+}
+
     void UpdateBarDarah()
+{
+    if (barDarah != null)
     {
-        if (barDarah != null)
-        {
-            barDarah.value = (float)hp / hpMaks;
-        }
+        barDarah.fillAmount = Mathf.Clamp01((float)hp / hpMaks);
     }
+}
 }

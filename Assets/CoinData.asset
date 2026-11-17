@@ -15,4 +15,6 @@ MonoBehaviour:
   ItemName: Coin
   ItemIcon: {fileID: 8739615026645237632, guid: 4140faea6f5f2e24faefdccdbc9579a7, type: 3}
   Quantity: 1
+  healAmount: 0
+  maxStack: 99
   ItemDescription: Koin emas buat jajan
