@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
 
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
 
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void OnMove(InputValue value)
@@ -38,8 +40,7 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
     {
         Vector3 gerak = new Vector3(arahGerak.x, arahGerak.y, 0f);
         transform.position += gerak * kecepatan * Time.deltaTime;
-
-        if (arahGerak.x < 0)
+if (arahGerak.x < 0)
         {
             spriteRenderer.flipX = true;
         }
@@ -55,6 +56,14 @@ public class PlayerMovement : MonoBehaviour, IDdamageable
         {
             anim.SetFloat("MoveX", arahGerak.x);
             anim.SetFloat("MoveY", arahGerak.y);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (rb != null)
+        {
+            rb.linearVelocity = arahGerak * kecepatan;
         }
     }
 
